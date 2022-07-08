@@ -1,0 +1,4 @@
+$main-background-color: #E0DCD5;
+$main-border-color: darken($main-background-color, 25%);
+$card-background-color: lighten(desaturate(adjust-hue($main-background-color, -38), 15.07), 14.31);
+$main-text-color: #444444;

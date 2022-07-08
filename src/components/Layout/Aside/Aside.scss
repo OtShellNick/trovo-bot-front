@@ -1,0 +1,22 @@
+@import "@style/main.scss";
+
+.aside {
+
+  &__list {
+    padding: 10px 5px 10px 0;
+
+    &__item {
+      cursor: pointer;
+      text-align: center;
+      padding: 5px;
+      border: 1px solid $main-border-color;
+      border-radius: 10px;
+      box-shadow: 0 1px 2px 0 rgba(0,0,0,0.14);
+      background-color: $card-background-color;
+
+      &:not(:last-child) {
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

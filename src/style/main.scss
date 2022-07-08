@@ -1,0 +1,25 @@
+@import "colors";
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  color: $main-text-color;
+  background-color: $main-background-color;
+}
+
+ul, h1 {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: 1fr 12fr 1fr;
+  height: 100vh;
+  margin: 0 auto;
+}
