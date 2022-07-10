@@ -105,7 +105,9 @@ module.exports = {
     filename: '[name].bundle.js',
   },
   optimization: {
-    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'async',
+    },
   },
   module: {
     rules: [
