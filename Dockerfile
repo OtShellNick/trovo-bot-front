@@ -1,5 +1,7 @@
 FROM node:16-alpine AS builder
 
+WORKDIR '/'
+
 COPY . .
 
 RUN npm install --frozen-lockfile --legacy-peer-deps
