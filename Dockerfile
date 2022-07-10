@@ -1,11 +1,9 @@
 FROM node:16-alpine AS builder
 
-WORKDIR '/src'
-
-COPY package.json ./
+COPY . .
 
 RUN npm install --frozen-lockfile --legacy-peer-deps
-COPY . .
+
 RUN npm run prod
 
 FROM nginx:1.19-alpine AS server
