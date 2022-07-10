@@ -18,7 +18,7 @@ const Login = () => {
 &scope=channel_details_self+channel_update_self+user_details_self
 +channel_subscriptions+chat_send_self
 +chat_connect+send_to_my_channel+manage_messages
-&redirect_uri=http://192.168.31.37:8088/
+&redirect_uri=http://151.248.118.164/
 &state=rbtrEGERHwfebhtrEFEVEfcreg655y4r33feGREef`);
   };
 
