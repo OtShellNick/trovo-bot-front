@@ -1,4 +1,4 @@
-import React, { lazy, useEffect } from 'react';
+import React, { lazy, useEffect, useState } from 'react';
 import {
   Routes, Route, useLocation, useNavigate, useSearchParams,
 } from 'react-router-dom';
@@ -20,6 +20,7 @@ const Dashboard = lazy(() => import('@components/Dashboard/Dashboard'));
 const Settings = lazy(() => import('@components/Settings/Settings'));
 
 const App = () => {
+  const [preloading, setPreloading] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,10 +31,12 @@ const App = () => {
   useEffect(() => {
     if (!auth && location.pathname !== '/login') navigate('/login');
     if (auth && location.pathname === '/login') navigate('/');
-    if (!auth && code && location.pathname !== '/settings') {
+    if (!auth && code) {
+      setPreloading(true);
       login({ code }).then((jwt) => {
         CookieHelper.set('appSessionJwt', jwt, {});
         navigate('/', { replace: true });
+        setPreloading(false);
       });
     }
     if (auth && location.pathname !== '/login') {
@@ -49,7 +52,7 @@ const App = () => {
         <Route index element={<Dashboard />} />
         <Route path="/settings" element={<Settings />} />
       </Route>
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={preloading ? <div>Loading</div> : <Login />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

@@ -12,6 +12,11 @@ const initialState = {
     role: '',
     botOn: false,
     sendSelf: false,
+    settings: {
+      botOn: false,
+      sendSelf: false,
+      triggers: [],
+    },
   },
 };
 

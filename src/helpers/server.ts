@@ -2,8 +2,9 @@ import axios from 'axios';
 import * as CookieHelper from '@helpers/Cookie';
 import CONFIG from '@config/config';
 
+// @ts-ignore
 // eslint-disable-next-line no-undef
-const server = CONFIG.production.url;
+const { server } = CONFIG[MODE];
 
 const Server = (
   method: 'get' | 'post' | 'put' | 'delete',

@@ -4,6 +4,7 @@ import { Button } from '@mui/material';
 import CountUp from 'react-countup';
 
 import './Login.scss';
+import CONFIG from '@config/config';
 
 const Login = () => {
   const [count, setCount] = useState(0);
@@ -12,13 +13,12 @@ const Login = () => {
   }, [count]);
 
   const loginHandler = () => {
-    // eslint-disable-next-line no-undef
     window.location.replace(`https://open.trovo.live/page/login.html?client_id=${CLIENT_ID}
 &response_type=code
 &scope=channel_details_self+channel_update_self+user_details_self
 +channel_subscriptions+chat_send_self
 +chat_connect+send_to_my_channel+manage_messages
-&redirect_uri=http://151.248.118.164/
+&redirect_uri=${CONFIG[MODE].url}
 &state=rbtrEGERHwfebhtrEFEVEfcreg655y4r33feGREef`);
   };
 

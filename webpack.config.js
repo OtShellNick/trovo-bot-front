@@ -8,7 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 // const CopyPlugin = require('copy-webpack-plugin');
 
-const { NODE_ENV, CLIENT_ID } = process.env;
+const { NODE_ENV, CLIENT_ID, MODE } = process.env;
 const IsDev = NODE_ENV === 'development';
 
 const filename = (ext) => (IsDev ? `[name].${ext}` : `[name].[contenthash].${ext}`);
@@ -78,7 +78,7 @@ const plugins = () => [
   }),
   new webpack.DefinePlugin({
     CLIENT_ID: `'${CLIENT_ID}'`,
-    MODE: `'${NODE_ENV}'`,
+    MODE: `'${MODE}'`,
   }),
 ];
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import {
   Stack,
@@ -15,20 +15,15 @@ import {
 } from '@mui/material';
 
 import './Settings.scss';
-import { TSettingsUpdate, updateSettings } from '@actions/settingsActions';
+import { TSettingsUpdate } from '@actions/settingsActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@store/mainStore';
-import { getSelf, TUser } from '@actions/userActions';
+import { getSelf, TUser, updateUser } from '@actions/userActions';
 import { loginUser } from '@store/actions/userActions';
 
 const Settings = () => {
-  const [settings, setSettings] = useState<TSettingsUpdate>({ botOn: false, sendSelf: false });
   const { user } = useSelector<RootState, { user: TUser }>((state) => state.user);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    setSettings({ botOn: user.botOn, sendSelf: user.sendSelf });
-  }, [user]);
 
   const IOSSwitch = styled((props: SwitchProps) => (
     <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -83,7 +78,14 @@ const Settings = () => {
 
   const botOnOff = async ({ botOn, sendSelf }: TSettingsUpdate) => {
     try {
-      await updateSettings({ botOn, sendSelf });
+      await updateUser({
+        userId: user.userId,
+        settings: {
+          botOn,
+          sendSelf,
+          triggers: user.settings.triggers,
+        },
+      });
       const newUser = await getSelf();
       dispatch(loginUser(newUser));
     } catch (e) {
@@ -97,9 +99,9 @@ const Settings = () => {
         <Typography>Enable Bot</Typography>
         <IOSSwitch
           sx={{ m: 1 }}
-          checked={settings.botOn || false}
+          checked={user.settings.botOn || false}
           onChange={(e) => {
-            botOnOff({ botOn: e.target.checked, sendSelf: settings.sendSelf });
+            botOnOff({ botOn: e.target.checked, sendSelf: user.settings.sendSelf });
           }}
         />
       </Stack>
@@ -107,10 +109,10 @@ const Settings = () => {
         <Typography>Send From Myself</Typography>
         <IOSSwitch
           sx={{ m: 1 }}
-          checked={settings.sendSelf || false}
+          checked={user.settings.sendSelf || false}
           disabled={user.role === 'user'}
           onChange={(e) => {
-            botOnOff({ sendSelf: e.target.checked, botOn: settings.botOn });
+            botOnOff({ sendSelf: e.target.checked, botOn: user.settings.botOn });
           }}
         />
       </Stack>
