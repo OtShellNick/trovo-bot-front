@@ -14,8 +14,8 @@ const CONFIG: TConfig = {
     server: 'http://192.168.31.37:4112/',
   },
   production: {
-    url: 'http://151.248.118.164/',
-    server: 'http://151.248.118.164:4112/',
+    url: 'https://botobro.ru/',
+    server: 'https://botobro.ru/',
   },
 };
 

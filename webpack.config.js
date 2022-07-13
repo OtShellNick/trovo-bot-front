@@ -191,6 +191,7 @@ module.exports = {
     static: './build',
     historyApiFallback: true,
     compress: true,
+    https: true,
   },
   plugins: plugins(),
 };
